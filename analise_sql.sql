@@ -97,6 +97,7 @@ JOIN `datario.turismo_fluxo_visitantes.rede_hoteleira_ocupacao_eventos` AS e
 WHERE c.tipo = "Perturbação do sossego"
 AND e.data_inicial IS NOT NULL
 AND e.data_final IS NOT NULL
+AND c.data_inicio BETWEEN '2022-01-01' AND '2023-12-31'
 ORDER BY c.data_inicio ASC;
 
 -- 8. Quantos chamados desse subtipo foram abertos em cada evento?
