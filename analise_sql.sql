@@ -107,7 +107,6 @@ ORDER BY c.data_inicio ASC;
 -- Réveillon - 162 chamados
 SELECT 
     e.evento,
-    -- EXTRACT(YEAR FROM e.data_inicial) AS ano_evento,
     COUNT(c.id_chamado) AS total_chamados
 FROM `datario.adm_central_atendimento_1746.chamado` AS c
 JOIN `datario.turismo_fluxo_visitantes.rede_hoteleira_ocupacao_eventos` AS e
@@ -115,6 +114,7 @@ JOIN `datario.turismo_fluxo_visitantes.rede_hoteleira_ocupacao_eventos` AS e
 WHERE c.tipo = "Perturbação do sossego"
 AND e.data_inicial IS NOT NULL
 AND e.data_final IS NOT NULL
+AND c.data_inicio BETWEEN '2022-01-01' AND '2023-12-31'
 GROUP BY e.evento
 ORDER BY total_chamados DESC;
 
@@ -131,7 +131,7 @@ JOIN `datario.turismo_fluxo_visitantes.rede_hoteleira_ocupacao_eventos` AS e
 WHERE c.tipo = "Perturbação do sossego"
 AND e.data_inicial IS NOT NULL
 AND e.data_final IS NOT NULL
-AND c.data_inicio BETWEEN '2022-02-01' AND '2024-01-01'
+AND c.data_inicio BETWEEN '2022-02-01' AND '2023-12-31'
 GROUP BY e.evento, e.data_inicial, e.data_final
 ORDER BY media_diaria_chamados DESC;
 
