@@ -32,7 +32,8 @@ FROM `datario.dados_mestres.bairro`
 df_bairros = bd.read_sql(query_bairros, billing_project_id=billing_project_id)
 df_chamados_bairro = df_chamados.merge(df_bairros, on="id_bairro", how="left")
 df_3 = df_chamados_bairro.groupby("nome").agg({"id_chamado": "count"}).reset_index()
-df_3.sort_values("id_chamado", ascending=False, inplace=True)
+df_3.rename({"id_chamado": "qtd_chamados"}, axis=1, inplace=True)
+df_3.sort_values("qtd_chamados", ascending=False, inplace=True)
 print("\n3. Top 3 bairros com mais chamados:")
 print(df_3.iloc[0:3].to_string(index=False))
 
@@ -75,60 +76,28 @@ df_7 = df_merged[
     (df_merged["data_inicio"] <= df_merged["data_final"])
 ]
 
-print(f"\n7. Chamados abertos durante os eventos do tipo 'perturbação do sossego': \n{df_7.head(5)}")
+print("\n7. Chamados abertos durante os eventos do tipo 'perturbação do sossego':")
+print("OBS: Apenas os 5 primeiros são exibidos para não ocupar muito espaço.")
+print(df_7.head().to_string(index=False))
 
 # 8. Quantidade de chamados do tipo abertos em cada evento
-query_8 = """
-SELECT 
-    e.evento,
-    -- EXTRACT(YEAR FROM e.data_inicial) AS ano_evento,
-    COUNT(c.id_chamado) AS total_chamados
-FROM `datario.adm_central_atendimento_1746.chamado` AS c
-JOIN `datario.turismo_fluxo_visitantes.rede_hoteleira_ocupacao_eventos` AS e
-    ON c.data_inicio BETWEEN e.data_inicial AND e.data_final
-WHERE c.tipo = "Perturbação do sossego"
-AND e.data_inicial IS NOT NULL
-AND e.data_final IS NOT NULL
-GROUP BY e.evento
-ORDER BY total_chamados DESC;
-"""
-df_8 = bd.read_sql(query_8, billing_project_id=billing_project_id)
-print(f"\n8. Quantidade de chamados abertos em cada evento: \n{df_8}")
-query_8_1 = """
-SELECT 
-    e.evento,
-    EXTRACT(YEAR FROM e.data_inicial) AS ano_evento,
-    COUNT(c.id_chamado) AS total_chamados
-FROM `datario.adm_central_atendimento_1746.chamado` AS c
-JOIN `datario.turismo_fluxo_visitantes.rede_hoteleira_ocupacao_eventos` AS e
-    ON c.data_inicio BETWEEN e.data_inicial AND e.data_final
-WHERE c.tipo = "Perturbação do sossego"
-AND e.data_inicial IS NOT NULL
-AND e.data_final IS NOT NULL
-GROUP BY e.evento, ano_evento
-ORDER BY ano_evento ASC, total_chamados DESC;
-"""
-df_8_1 = bd.read_sql(query_8_1, billing_project_id=billing_project_id)
-print(f"\nObs 8.1: Quantidade de chamados abertos por evento e ano: \n{df_8_1}")
+df_7["ano"] = df_7["data_inicio"].dt.year
+df_8 = df_7.groupby("evento").agg({"id_chamado": "count"}).reset_index()
+df_8.rename({"id_chamado": "qtd_chamados"}, axis=1, inplace=True)
+print("\n8. Quantidade de chamados abertos em cada evento:")
+print(df_8.to_string(index=False))
+df_8_1 = df_7.groupby(["evento", "ano"]).agg({"id_chamado": "count"}).reset_index()
+df_8_1.rename({"id_chamado": "qtd_chamados"}, axis=1, inplace=True)
+print("8.1: Quantidade de chamados abertos por evento e ano:")
+print(df_8_1.to_string(index=False))
+print("OBS: O Réveillon de 2022 teve mais que o dobro de chamados que o de 2023.")
 
 # 9. Evento com maior média diária de chamados abertos
-query_9 = """
-SELECT 
-    e.evento,
-    COUNT(c.id_chamado) AS total_chamados,
-    DATE_DIFF(e.data_final, e.data_inicial, DAY) + 1 AS duracao_evento_dias,
-    COUNT(c.id_chamado) / (DATE_DIFF(e.data_final, e.data_inicial, DAY) + 1) AS media_diaria_chamados
-FROM `datario.adm_central_atendimento_1746.chamado` AS c
-JOIN `datario.turismo_fluxo_visitantes.rede_hoteleira_ocupacao_eventos` AS e
-    ON c.data_inicio BETWEEN e.data_inicial AND e.data_final
-WHERE c.tipo = "Perturbação do sossego"
-AND e.data_inicial IS NOT NULL
-AND e.data_final IS NOT NULL
-AND c.data_inicio BETWEEN '2022-02-01' AND '2024-01-01'
-GROUP BY e.evento, e.data_inicial, e.data_final
-ORDER BY media_diaria_chamados DESC;
-"""
-df_9 = bd.read_sql(query_9, billing_project_id=billing_project_id)
+df_9 = df_7.groupby(["evento", "data_inicial", "data_final"]).agg({"id_chamado": "count"}).reset_index()
+df_9["duracao_evento_dias"] = (df_9["data_final"] - df_9["data_inicial"]).dt.days + 1
+df_9 = df_9.groupby(["evento"]).agg({"id_chamado": "sum", "duracao_evento_dias": "sum"}).reset_index()
+df_9["media_diaria"] = df_9["id_chamado"]/df_9["duracao_evento_dias"]
+df_9.sort_values("media_diaria", ascending=False, inplace=True)
 evento_mais_problematico = df_9.iloc[0, 0]
 media_diaria_chamados = df_9.iloc[0, 3]
 print(f"\n9. O evento com maior média diária de chamados abertos é: {evento_mais_problematico} com média de {media_diaria_chamados} chamados abertos por dia")
@@ -139,8 +108,8 @@ data_fim = date(2023, 12, 31)
 quantidade_dias = (data_fim - data_inicio).days + 1
 media_geral = total_chamados_perturbacao/quantidade_dias
 df_10 = df_9.copy()
-df_10 = df_10.groupby("evento").agg({"total_chamados": "sum", "duracao_evento_dias": "sum"}).reset_index()
-df_10["media_eventos"] = df_10["total_chamados"]/df_10["duracao_evento_dias"]
+df_10 = df_10.groupby("evento").agg({"id_chamado": "sum", "duracao_evento_dias": "sum"}).reset_index()
+df_10["media_eventos"] = df_10["id_chamado"]/df_10["duracao_evento_dias"]
 df_10["media_geral"] = media_geral
 df_10["fator_variacao"] = df_10["media_eventos"] / df_10["media_geral"]
 df_10["variacao_percentual"] = (df_10["fator_variacao"] - 1) * 100
