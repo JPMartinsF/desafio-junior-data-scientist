@@ -1,6 +1,7 @@
-import basedosdados as bd
-from datetime import date
 import os
+from datetime import date
+
+import basedosdados as bd
 import pandas as pd
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "desafiojuniordatascientist-5c2a920c3038.json"
 
@@ -11,7 +12,7 @@ billing_project_id = "desafiojuniordatascientist"
 query_chamados = """
 SELECT id_chamado, data_inicio, id_bairro, tipo
 FROM `datario.adm_central_atendimento_1746.chamado`
-WHERE data_inicio >= '2023-04-01 00:00:00' 
+WHERE data_inicio >= '2023-04-01 00:00:00'
 AND data_inicio < '2023-04-02 00:00:00'
 """
 df_chamados = bd.read_sql(query_chamados, billing_project_id=billing_project_id)
@@ -100,7 +101,8 @@ df_9["media_diaria"] = df_9["id_chamado"]/df_9["duracao_evento_dias"]
 df_9.sort_values("media_diaria", ascending=False, inplace=True)
 evento_mais_problematico = df_9.iloc[0, 0]
 media_diaria_chamados = df_9.iloc[0, 3]
-print(f"\n9. O evento com maior média diária de chamados abertos é: {evento_mais_problematico} com média de {media_diaria_chamados} chamados abertos por dia")
+print(f"\n9. O evento com maior média diária de chamados abertos é: {evento_mais_problematico} \
+      com média de {media_diaria_chamados} chamados abertos por dia")
 
 # 10. Comparação de médias diárias durante eventos e geral no período em questão
 data_inicio = date(2022, 1, 1)
@@ -114,4 +116,5 @@ df_10["media_geral"] = media_geral
 df_10["fator_variacao"] = df_10["media_eventos"] / df_10["media_geral"]
 df_10["variacao_percentual"] = (df_10["fator_variacao"] - 1) * 100
 
-print(f"\n10. Comparação de médias diárias entre os eventos e a média diária no período: \n{df_10[["evento", "media_eventos", "media_geral", "fator_variacao", "variacao_percentual"]]}")
+print("\n10. Comparação de médias diárias entre os eventos e a média diária no período:")
+print(df_10[["evento", "media_eventos", "media_geral", "fator_variacao", "variacao_percentual"]].to_string(index=False))
