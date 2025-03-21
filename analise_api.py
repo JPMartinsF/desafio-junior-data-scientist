@@ -58,7 +58,7 @@ print("\n4. Temperatura média de cada mês: ")
 print(grouped_df_clima.to_string(index=False))
 
 tempo_predominante = df_clima.groupby("mes")["weather_code"].agg(lambda x: x.mode()[0]).reset_index()
-with open("descriptions.json", "r") as file:
+with open("dados/descriptions.json", "r") as file:
     weather_code_dict = json.load(file)
 weather_code_mapping = {int(code): data["day"]["description"] for code, data in weather_code_dict.items()}
 tempo_predominante["weather_description"] = tempo_predominante["weather_code"].map(weather_code_mapping)
@@ -80,4 +80,4 @@ print(feriados_ruins[["localName", "date"]].to_string(index=False))
 feriados_bons = merged_df[merged_df["weather_code"].isin(tempos_bons)]
 melhor_feriado = feriados_bons.loc[feriados_bons["temperature_2m_mean"].idxmax()]
 print(f"\n8. O feriados 'mais aproveitável' de 2024 foi o {melhor_feriado['localName']} \n   em {melhor_feriado['date']}", end="")
-print(f"com temperatura de {melhor_feriado['temperature_2m_mean']}°C e clima {melhor_feriado['weather_description']}")
+print(f" com temperatura de {melhor_feriado['temperature_2m_mean']}°C e clima {melhor_feriado['weather_description']}")
