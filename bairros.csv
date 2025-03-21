@@ -1,0 +1,165 @@
+id_bairro,nome,subprefeitura
+2,Gamboa,Centro
+1,Saúde,Centro
+4,Caju,Centro
+3,Santo Cristo,Centro
+161,Lapa,Centro
+5,Centro,Centro
+9,Estácio,Centro
+7,Rio Comprido,Centro
+8,Cidade Nova,Centro
+6,Catumbi,Centro
+11,Mangueira,Centro
+12,Benfica,Centro
+158,Vasco da Gama,Centro
+10,São Cristóvão,Centro
+13,Paquetá,Ilhas
+14,Santa Teresa,Centro
+18,Catete,Zona Sul
+15,Flamengo,Zona Sul
+20,Botafogo,Zona Sul
+21,Humaitá,Zona Sul
+16,Glória,Centro
+19,Cosme Velho,Zona Sul
+22,Urca,Zona Sul
+17,Laranjeiras,Zona Sul
+23,Leme,Zona Sul
+24,Copacabana,Zona Sul
+30,Vidigal,Zona Sul
+25,Ipanema,Zona Sul
+31,São Conrado,Zona Sul
+29,Gávea,Zona Sul
+27,Lagoa,Zona Sul
+28,Jardim Botânico,Zona Sul
+26,Leblon,Zona Sul
+154,Rocinha,Zona Sul
+33,Tijuca,Grande Tijuca
+34,Alto da Boa Vista,Grande Tijuca
+32,Praça da Bandeira,Grande Tijuca
+38,Grajaú,Grande Tijuca
+35,Maracanã,Grande Tijuca
+36,Vila Isabel,Grande Tijuca
+37,Andaraí,Grande Tijuca
+42,Olaria,Zona Norte
+40,Bonsucesso,Zona Norte
+39,Manguinhos,Zona Norte
+41,Ramos,Zona Norte
+157,Maré,Zona Norte
+61,Engenho Novo,Zona Norte
+62,Lins de Vasconcelos,Zona Norte
+59,Riachuelo,Zona Norte
+58,Rocha,Zona Norte
+71,Pilares,Zona Norte
+66,Engenho de Dentro,Zona Norte
+60,Sampaio,Zona Norte
+63,Méier,Zona Norte
+70,Abolição,Zona Norte
+57,São Francisco Xavier,Zona Norte
+68,Encantado,Zona Norte
+67,Água Santa,Zona Norte
+51,Jacaré,Zona Norte
+69,Piedade,Zona Norte
+64,Todos os Santos,Zona Norte
+65,Cachambi,Zona Norte
+155,Jacarezinho,Zona Norte
+77,Colégio,Zona Norte
+74,Vila da Penha,Zona Norte
+73,Vicente de Carvalho,Zona Norte
+72,Vila Kosmos,Zona Norte
+76,Irajá,Zona Norte
+75,Vista Alegre,Zona Norte
+78,Campinho,Zona Norte
+80,Cavalcanti,Zona Norte
+86,Rocha Miranda,Zona Norte
+87,Honório Gurgel,Zona Norte
+85,Turiaçú,Zona Norte
+90,Marechal Hermes,Zona Norte
+88,Osvaldo Cruz,Zona Norte
+81,Engenheiro Leal,Zona Norte
+79,Quintino Bocaiúva,Zona Norte
+83,Madureira,Zona Norte
+84,Vaz Lobo,Zona Norte
+89,Bento Ribeiro,Zona Norte
+82,Cascadura,Zona Norte
+53,Del Castilho,Zona Norte
+54,Inhaúma,Zona Norte
+50,Higienópolis,Zona Norte
+56,Tomás Coelho,Zona Norte
+55,Engenho da Rainha,Zona Norte
+52,Maria da Graça,Zona Norte
+156,Complexo do Alemão,Zona Norte
+44,Penha Circular,Zona Norte
+45,Brás de Pina,Zona Norte
+43,Penha,Zona Norte
+48,Vigário Geral,Zona Norte
+49,Jardim América,Zona Norte
+46,Cordovil,Zona Norte
+47,Parada de Lucas,Zona Norte
+106,Guadalupe,Zona Norte
+109,Ricardo de Albuquerque,Zona Norte
+107,Anchieta,Zona Norte
+108,Parque Anchieta,Zona Norte
+111,Acari,Zona Norte
+159,Parque Colúmbia,Zona Norte
+110,Coelho Neto,Zona Norte
+113,Costa Barros,Zona Norte
+112,Barros Filho,Zona Norte
+114,Pavuna,Zona Norte
+103,Portuguesa,Ilhas
+91,Ribeira,Ilhas
+93,Cacuia,Ilhas
+100,Jardim Carioca,Ilhas
+101,Tauá,Ilhas
+95,Praia da Bandeira,Ilhas
+97,Bancários,Ilhas
+94,Pitangueiras,Ilhas
+92,Zumbi,Ilhas
+98,Freguesia (Ilha),Ilhas
+104,Galeão,Ilhas
+105,Cidade Universitária,Ilhas
+102,Moneró,Ilhas
+96,Cocotá,Ilhas
+99,Jardim Guanabara,Ilhas
+124,Praça Seca,Jacarepaguá
+123,Tanque,Jacarepaguá
+122,Taquara,Jacarepaguá
+119,Curicica,Jacarepaguá
+116,Anil,Jacarepaguá
+121,Pechincha,Jacarepaguá
+125,Vila Valqueire,Jacarepaguá
+117,Gardênia Azul,Jacarepaguá
+120,Freguesia (Jacarepaguá),Jacarepaguá
+115,Jacarepaguá,Jacarepaguá
+118,Cidade de Deus,Jacarepaguá
+127,Itanhangá,Barra da Tijuca
+131,Vargem Grande,Barra da Tijuca
+132,Recreio dos Bandeirantes,Barra da Tijuca
+129,Camorim,Barra da Tijuca
+128,Barra da Tijuca,Barra da Tijuca
+130,Vargem Pequena,Barra da Tijuca
+126,Joá,Barra da Tijuca
+133,Grumari,Barra da Tijuca
+162,Vila Kennedy,Grande Bangu
+142,Senador Camará,Grande Bangu
+160,Gericinó,Grande Bangu
+140,Padre Miguel,Grande Bangu
+163,Jabour,Grande Bangu
+141,Bangu,Grande Bangu
+138,Magalhães Bastos,Grande Bangu
+134,Deodoro,Grande Bangu
+137,Jardim Sulacap,Grande Bangu
+135,Vila Militar,Grande Bangu
+139,Realengo,Grande Bangu
+136,Campo dos Afonsos,Grande Bangu
+144,Campo Grande,Zona Oeste
+145,Senador Vasconcelos,Zona Oeste
+147,Cosmos,Zona Oeste
+143,Santíssimo,Zona Oeste
+146,Inhoaíba,Zona Oeste
+149,Santa Cruz,Zona Oeste
+148,Paciência,Zona Oeste
+150,Sepetiba,Zona Oeste
+152,Barra de Guaratiba,Zona Oeste
+164,Ilha de Guaratiba,Zona Oeste
+151,Guaratiba,Zona Oeste
+153,Pedra de Guaratiba,Zona Oeste
